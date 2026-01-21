@@ -86,7 +86,7 @@ pip install -r requirements.txt
 
 ---
 
-# Ejercicio 1 — Dataset confiable de teléfonos (Conceptual)
+# Ejercicio 1 — Dataset confiable de teléfonos
 
 ## Objetivo
 
@@ -102,7 +102,7 @@ Diseñar un proceso **auditable, confiable y controlado por CI/CD** para constru
 
 ---
 
-# Ejercicio 2 — KPI, Calidad y Trazabilidad (Conceptual)
+# Ejercicio 2 — KPI, Calidad y Trazabilidad 
 
 ## Objetivo
 
@@ -115,8 +115,6 @@ Definir un mecanismo para monitorear calidad del dataset de teléfonos y exponer
 > Nota: este ejercicio es conceptual (no requiere ejecución de código).
 
 ---
-
-# Ejercicio 3 — Rachas
 
 # Ejercicio 3 — Rachas (Python + SQLite)
 
@@ -148,7 +146,7 @@ python 3_rachas_sql/rachas_pipeline.py --fecha-base 2024-12-15 --n 3
 
 ---
 
-# Ejercicio 4 — Procesamiento HTML (Inlining de imágenes)
+# Ejercicio 4 — Procesamiento HTML
 
 ## Objetivo
 

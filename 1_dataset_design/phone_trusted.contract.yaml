@@ -27,8 +27,7 @@ schema:
   - name: phone_e164
     type: string
     nullable: false
-    description: Teléfono en formato E.164 (ej. +573001234567)
-    # Nota: algunos países tienen números cortos (ej. Monaco +377)
+    description: Teléfono en formato E.164 (ej. +573001234567)    
     quality:
       rules:
         - name: e164_format
