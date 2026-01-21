@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Test 2: Mixed Sources</title>
+</head>
+<body>
+  <h1>Test 2: Mixed Image Sources</h1>
+  
+  <h2>Local images (should be inlined)</h2>
+  <img src="assets/red.svg" alt="Local red">
+  <img src="assets/icon.png" alt="Local PNG">
+  
+  <h2>Remote image (should NOT be inlined)</h2>
+  <img src="https://via.placeholder.com/150" alt="Remote placeholder">
+  
+  <h2>Already data URI (should remain unchanged)</h2>
+  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iZ3JheSIvPgo8L3N2Zz4=" alt="Already encoded">
+  
+  <h2>Missing image (should fail gracefully)</h2>
+  <img src="assets/nonexistent.svg" alt="Missing file">
+  
+  <h2>Empty src (should fail)</h2>
+  <img src="" alt="Empty source">
+  <img alt="No src attribute">
+</body>
+</html>

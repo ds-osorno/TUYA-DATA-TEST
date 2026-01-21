@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Test 4: Tag Variants</title>
+</head>
+<body>
+  <h1>Test 4: Different Image Tag Styles</h1>
+  
+  <h2>Self-closing tag</h2>
+  <img src="assets/red.svg" alt="Self closing" />
+  
+  <h2>Regular opening tag</h2>
+  <img src="assets/green.svg" alt="Regular tag">
+  
+  <h2>With multiple attributes</h2>
+  <img src="assets/blue.svg" alt="Blue" width="200" height="200" class="test-class" id="test-id">
+  
+  <h2>With query string (should be cleaned)</h2>
+  <img src="assets/red.svg?version=1.0" alt="With query">
+  
+  <h2>With fragment (should be cleaned)</h2>
+  <img src="assets/green.svg#layer1" alt="With fragment">
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "success": {
+    "C:\\Users\\Jenny\\OneDrive - Instituto Colombiano de Bienestar Familiar\\Escritorio\\tuya-data-test\\4_html_processing\\html\\test_basic.html": [
+      "assets/red.svg",
+      "assets/green.svg",
+      "assets/blue.svg"
+    ],
+    "C:\\Users\\Jenny\\OneDrive - Instituto Colombiano de Bienestar Familiar\\Escritorio\\tuya-data-test\\4_html_processing\\html\\test_encoding.html": [
+      "assets/blue.svg"
+    ],
+    "C:\\Users\\Jenny\\OneDrive - Instituto Colombiano de Bienestar Familiar\\Escritorio\\tuya-data-test\\4_html_processing\\html\\test_mixed.html": [
+      "assets/red.svg",
+      "assets/icon.png"
+    ],
+    "C:\\Users\\Jenny\\OneDrive - Instituto Colombiano de Bienestar Familiar\\Escritorio\\tuya-data-test\\4_html_processing\\html\\test_tags.html": [
+      "assets/red.svg",
+      "assets/green.svg",
+      "assets/blue.svg",
+      "assets/red.svg?version=1.0",
+      "assets/green.svg#layer1"
+    ],
+    "C:\\Users\\Jenny\\OneDrive - Instituto Colombiano de Bienestar Familiar\\Escritorio\\tuya-data-test\\4_html_processing\\html\\nested\\deep\\test_relative.html": [
+      "../../assets/red.svg",
+      "./yellow.svg",
+      "yellow.svg"
+    ]
+  },
+  "fail": {
+    "C:\\Users\\Jenny\\OneDrive - Instituto Colombiano de Bienestar Familiar\\Escritorio\\tuya-data-test\\4_html_processing\\html\\test_mixed.html": {
+      "https://via.placeholder.com/150": "Remote URLs cannot be inlined",
+      "assets/nonexistent.svg": "File not found: C:\\Users\\Jenny\\OneDrive - Instituto Colombiano de Bienestar Familiar\\Escritorio\\tuya-data-test\\4_html_processing\\html\\assets\\nonexistent.svg",
+      "(empty)": "Image tag has no src attribute"
+    }
+  }
+}

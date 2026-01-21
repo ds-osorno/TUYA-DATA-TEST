@@ -1,0 +1,133 @@
+version: 1
+dataset:
+  name: phone_trusted
+  layer: gold
+  description: |
+    Dataset de teléfonos listos para consumo.
+    Normalizado a E.164, deduplicado y con flags de calidad.
+  owner:
+    team: "Data Engineering"
+    contact: "data-team@tuya.com"
+  contains_pii: true
+  pii_fields: ["phone_e164"]
+  storage:
+    platform: "Azure Databricks"
+    format: "delta"
+    location_hint: "abfss://<container>@<storage-account>.dfs.core.windows.net/gold/phone_trusted"
+  primary_key:
+    - customer_id
+    - phone_e164
+
+schema:
+  - name: customer_id
+    type: string
+    nullable: false
+    description: Unique identifier of the customer.
+
+  - name: phone_e164
+    type: string
+    nullable: false
+    description: Teléfono en formato E.164 (ej. +573001234567)
+    # Nota: algunos países tienen números cortos (ej. Monaco +377)
+    quality:
+      rules:
+        - name: e164_format
+          type: regex
+          pattern: "^\\+[1-9]\\d{6,14}$"
+          severity: error
+
+  - name: country_code
+    type: string
+    nullable: true
+    description: ISO country code derived from phone prefix or customer profile.
+
+  - name: phone_type
+    type: string
+    nullable: true
+    description: One of mobile/home/work/unknown.
+    quality:
+      rules:
+        - name: allowed_values
+          type: enum
+          values: ["mobile", "home", "work", "unknown"]
+          severity: warning
+
+  - name: is_primary
+    type: boolean
+    nullable: false
+    description: True if this is the customer's primary phone.
+
+  - name: status
+    type: string
+    nullable: false
+    description: |
+      - valid: pasa todas las validaciones
+      - invalid: falla formato o es placeholder
+      - suspect: válido pero con alertas (ej. compartido)
+    quality:
+      rules:
+        - name: allowed_values
+          type: enum
+          values: ["valid", "invalid", "suspect"]
+          severity: error
+
+  - name: source_system
+    type: string
+    nullable: false
+    description: System of record or ingestion source (CRM, KYC, etc.).
+
+  - name: valid_from
+    type: date
+    nullable: true
+    description: Start date of validity for SCD2 strategy.
+
+  - name: valid_to
+    type: date
+    nullable: true
+    description: End date of validity for SCD2 strategy (null means current).
+
+  - name: ingestion_ts
+    type: timestamp
+    nullable: false
+    description: Ingestion timestamp for the record.
+
+  - name: run_id
+    type: string
+    nullable: false
+    description: Pipeline execution id for auditability.
+
+quality_expectations:
+  - name: primary_phone_per_customer
+    description: At most one primary phone per customer.
+    severity: error
+    rule_type: aggregate
+    sql_hint: >
+      SELECT customer_id
+      FROM phone_trusted
+      GROUP BY customer_id
+      HAVING SUM(CASE WHEN is_primary THEN 1 ELSE 0 END) > 1;
+
+  - name: duplicate_phone_per_customer
+    description: No duplicate phone_e164 per customer_id.
+    severity: error
+    rule_type: aggregate
+    sql_hint: >
+      SELECT customer_id, phone_e164
+      FROM phone_trusted
+      GROUP BY customer_id, phone_e164
+      HAVING COUNT(*) > 1;
+
+  - name: minimum_valid_rate
+    description: Valid rate should be >= 98% (example threshold).
+    severity: warning
+    rule_type: metric
+    metric_hint: "valid_count / total_count"
+    threshold:
+      gte: 0.98
+
+lineage:
+  upstream:
+    - name: phone_raw
+      layer: bronze
+    - name: phone_valid
+      layer: silver
