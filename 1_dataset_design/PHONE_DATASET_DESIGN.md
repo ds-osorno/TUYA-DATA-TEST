@@ -154,7 +154,7 @@ Todos los logs de Databricks Jobs se envían a Azure Log Analytics (via Azure Di
 ## Quién hace qué
 
 - **Product Owner (negocio):** define qué teléfono es primario y reglas de negocio.
-- **Data Steward:** umbrales de calidad y whitelist/blacklist.
+- **Data lead:** umbrales de calidad y whitelist/blacklist.
 - **Data Engineering (nosotros):** pipeline, CI/CD y observabilidad.
 
 **Lineage:** Unity Catalog trackea la mayoría del lineage; además guardamos por registro `source_system`, `run_id`, `ingestion_ts` y una tabla `lineage_logs` con `upstream_table`, `downstream_table`, `transformation_applied`, `run_id`.
