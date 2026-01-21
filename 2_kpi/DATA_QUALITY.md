@@ -133,7 +133,7 @@ Un Databricks Job programado cada 24 horas (cron: `0 8 * * *`) ejecuta el notebo
 3. Si encuentra problemas, envía notificaciones.
 
 **Flujo de alertas:**
-- **Error** (ej. `valid_rate < 95%`): webhook a Teams canal #data-alerts + email a data-steward@tuya.com.
+- **Error** (ej. `valid_rate < 95%`): webhook a Teams canal #data-alerts + email a dataDB@tuya.com
 - **Warning** (ej. `valid_rate 95-98%`): solo mensaje en Teams (sin email).
 
 **Payload del webhook a Teams:**
@@ -159,7 +159,7 @@ Un Databricks Job programado cada 24 horas (cron: `0 8 * * *`) ejecuta el notebo
 ```
 
 **Responsables de alertas:**
-- **Error**: Data Steward + Data Engineering Lead (ambos reciben email + Teams).
+- **Error**: Data DB + Data Engineering Lead (ambos reciben email + Teams).
 - **Warning**: Solo Data Engineering en canal #data-alerts (Teams).
 
 ## Dashboard para Negocio
@@ -181,7 +181,7 @@ El link del dashboard se incluye automáticamente en las alertas de Teams.
 ## Ownership
 
 - **Product Owner (negocio):** define umbrales y prioridades.
-- **Data Steward:** mantiene reglas de calidad y excepciones (whitelist/blacklist).
+- **Data DB:** mantiene reglas de calidad y excepciones (whitelist/blacklist).
 - **Data Engineering:** opera el pipeline, escribe métricas y configura alertas.
 
 ## Cómo usa negocio los KPIs
@@ -205,6 +205,4 @@ El link del dashboard se incluye automáticamente en las alertas de Teams.
 
 **Calidad:** `valid_rate >= 98%` en promedio mensual. Permitimos picos temporales mientras estemos en 95%+; si caemos <95%, es un incidente.
 
----
 
-Próximos pasos: Si quieres, puedo hacer ahora un ejemplo del schema DDL para `dq_metrics_phone` y un Databricks Notebook skeleton en Python que muestre cómo ejecutar las queries de arriba e insertar resultados.
